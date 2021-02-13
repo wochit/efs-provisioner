@@ -30,7 +30,10 @@ spec:
       release: "{{ .Release.Name }}"
   revisionHistoryLimit: {{ .Values.revisionHistoryLimit }}
   strategy:
-    type: Recreate
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 100%
+      maxUnavailable: 0%
   template:
     metadata:
     {{- if .Values.podAnnotations }}
